@@ -78,6 +78,14 @@ EOF
 
 RUN chmod +x /usr/local/bin/start-desktop
 
+RUN curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg \
+      https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg \
+    && curl -fsSLo /etc/apt/sources.list.d/brave-browser-release.sources \
+      https://brave-browser-apt-release.s3.brave.com/brave-browser.sources \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends brave-browser \
+    && rm -rf /var/lib/apt/lists/*
+    
 USER desktop
 WORKDIR /home/desktop
 
