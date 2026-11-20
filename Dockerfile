@@ -14,7 +14,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     openjdk-21-jre \
     xvfb \
     x11vnc \
-    fluxbox \
+    xfce4 \
+    xfce4-terminal \
+    dbus-x11 \
+    adwaita-icon-theme \
     xterm \
     novnc \
     websockify \
@@ -54,7 +57,7 @@ if [ "$ready" -ne 1 ]; then
     exit 1
 fi
 
-fluxbox &
+dbus-run-session -- xfce4-session &
 desktop_pid=$!
 
 x11vnc -display :0 \
